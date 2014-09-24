@@ -2,4 +2,6 @@ Some code for deciphering [BER TLV](http://en.wikipedia.org/wiki/X.690#BER_encod
 
 Source for the oddly named tool [tvr-decoder](http://tvr-decoder.appspot.com) running on Google's AppEngine. It started life decoding a single field from the EMV spec, the [TVR](http://en.wikipedia.org/wiki/Terminal_verification_results), and gained a bunch more features from there.
 
+Depends on the core decoder [library](https://github.com/binaryfoo/emv-bertlv).
+
 The [old project](https://code.google.com/p/tvr-decoder/) site hosts an [executable jar](https://code.google.com/p/tvr-decoder/downloads/detail?name=tvr-cmdline-1.0.jar) version.

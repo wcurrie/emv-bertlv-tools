@@ -23,7 +23,6 @@
         </pluginManagement>
     </build>
     <modules>
-        <module>tvr-core</module>
         <module>tvr-cmdline</module>
         <module>tvr-decoder-war</module>
         <module>tvr-decoder-ear</module>
