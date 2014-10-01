@@ -1,4 +1,4 @@
-package io.github.binaryfoo;
+package io.github.binaryfoo.controllers;
 
 import java.util.HashMap;
 

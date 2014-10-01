@@ -1,5 +1,9 @@
-package io.github.binaryfoo;
+package io.github.binaryfoo.controllers;
 
+import io.github.binaryfoo.DecodedData;
+import io.github.binaryfoo.HexDumpFactory;
+import io.github.binaryfoo.RootDecoder;
+import io.github.binaryfoo.TagInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
