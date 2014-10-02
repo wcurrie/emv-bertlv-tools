@@ -22,7 +22,7 @@
         <dependency>
             <groupId>io.github.binaryfoo</groupId>
             <artifactId>emv-bertlv</artifactId>
-            <version>0.1.1-SNAPSHOT</version>
+            <version>0.1.2-SNAPSHOT</version>
         </dependency>
         <!-- Compile/runtime dependencies -->
         <dependency>
