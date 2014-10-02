@@ -21,6 +21,7 @@ div#footer {
 	bottom: 0;
 	text-align: center;
 	font-size: x-small;
+    z-index: -1;
 }
 
 div#footer p {
