@@ -84,6 +84,11 @@ td.indent {
     height: auto;
 }
 
+.expander:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 .collapsed.detail {
     opacity: 0;
     height: 0;

@@ -29,6 +29,7 @@ public class DecodeController {
     public String decode(@RequestParam String tag, @RequestParam String value, @RequestParam String meta, ModelMap modelMap) {
         try {
             decodeInto(tag, value, meta, modelMap);
+            modelMap.addAttribute("noisy", NoisyTagList.noisyOnes());
             return "decodedData";
         } catch (DecodeFailedException e) {
             modelMap.addAttribute("error", e.getMessage());

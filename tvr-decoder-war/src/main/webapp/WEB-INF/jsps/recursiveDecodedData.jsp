@@ -15,10 +15,10 @@
         <table class="composite-decoded" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
             <tr>
                 <td colspan="2">
-                <span class="composite-label">${item.rawData} <span class="glyphicon glyphicon-zoom-out expander" data-item="${itemId}"></span> <span class="composite-chunked collapsed" data-item="${itemId}">${item.decodedData}</span></span>
+                <span class="composite-label">${item.rawData} <span class="glyphicon glyphicon-zoom-${noisy[item.tag] ? 'in' : 'out'} expander" data-item="${itemId}"></span> <span class="composite-chunked" data-item="${itemId}">${item.decodedData}</span></span>
                 </td>
             </tr>
-            <tr class="detail expanded" data-item="${itemId}">
+            <tr class="detail" data-item="${itemId}">
                 <td class="indent"></td>
                 <td>
                 <c:set var="decodedData" value="${item.children}" scope="request"/>

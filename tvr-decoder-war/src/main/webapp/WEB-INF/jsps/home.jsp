@@ -24,7 +24,8 @@
                             $(this).click(function(e) {
                                 toggleExpander($(this));
                                 e.stopPropagation();
-                            })
+                            });
+                            initExpander($(this));
                         })
 			    	});
 		    	});
@@ -72,18 +73,34 @@
 			$("#rawData-"+rawDataId).hide("fast");
 		}
 
-        function toggleExpander(e) {
+        function getExpander(e) {
             var itemId = e[0].getAttribute("data-item");
             var collapsed = e.hasClass("glyphicon-zoom-in");
             var detail = $('.detail[data-item="' + itemId + '"]');
             var chunk = $('.composite-chunked[data-item="' + itemId + '"]');
-            if (collapsed) {
-                detail.addClass("expanded").removeClass("collapsed");
-                chunk.removeClass("expanded").addClass("collapsed");
+            return {collapsed: collapsed, detail: detail, chunk: chunk};
+        }
+
+        function initExpander(e) {
+            var expander = getExpander(e);
+            if (expander.collapsed) {
+                expander.detail.addClass("collapsed");
+                expander.chunk.addClass("expanded");
+            } else {
+                expander.detail.addClass("expanded");
+                expander.chunk.addClass("collapsed");
+            }
+        }
+
+        function toggleExpander(e) {
+            var expander = getExpander(e);
+            if (expander.collapsed) {
+                expander.detail.addClass("expanded").removeClass("collapsed");
+                expander.chunk.removeClass("expanded").addClass("collapsed");
                 e.removeClass("glyphicon-zoom-in").addClass("glyphicon-zoom-out")
             } else {
-                detail.removeClass("expanded").addClass("collapsed");
-                chunk.addClass("expanded").removeClass("collapsed");
+                expander.detail.removeClass("expanded").addClass("collapsed");
+                expander.chunk.addClass("expanded").removeClass("collapsed");
                 e.removeClass("glyphicon-zoom-out").addClass("glyphicon-zoom-in")
             }
         }
