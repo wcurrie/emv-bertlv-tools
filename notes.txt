@@ -7,3 +7,6 @@ https://code.google.com/p/javaemvreader/
 
 Command coding at APDU level:
 http://www.wrankl.de/SCTables/SCTables.html
+
+Try:
+https://developers.google.com/custom-search/docs/snippets#creating_snippets
