@@ -14,7 +14,7 @@ public class NoisyTagList {
      */
     public static Map<Tag, Boolean> noisyOnes() {
         Map<Tag, Boolean> map = new HashMap<>();
-        for (Tag tag : Arrays.asList(EmvTags.IAC_DEFAULT, EmvTags.IAC_DENIAL, EmvTags.IAC_ONLINE, EmvTags.CDOL_1, EmvTags.CDOL_2)) {
+        for (Tag tag : Arrays.asList(EmvTags.IAC_DEFAULT, EmvTags.IAC_DENIAL, EmvTags.IAC_ONLINE, EmvTags.CDOL_1, EmvTags.CDOL_2, EmvTags.APPLICATION_USAGE_CONTROL)) {
             map.put(tag, true);
         }
         return map;
