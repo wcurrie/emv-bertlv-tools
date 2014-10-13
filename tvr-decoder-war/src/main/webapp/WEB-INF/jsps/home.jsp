@@ -60,8 +60,8 @@
 		    highlighted=decoded;
 
             var rawDataId=decoded.attr("data-i");
-            var start=decoded.attr("data-s");
-            var end=decoded.attr("data-e");
+            var start=+decoded.attr("data-s");
+            var end=+decoded.attr("data-e");
 			$("#rawData-"+rawDataId).show("fast");
 			var i = 0;
 			for (i = start; i < end; i++) {
