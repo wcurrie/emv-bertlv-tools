@@ -48,8 +48,8 @@ public class DecodeControllerTest {
         DecodedData gpoCommand = findWithRaw(decodedData, "C-APDU: GPO");
         assertThat(gpoCommand, is(not(nullValue())));
         List<DecodedData> expectedDecodedTTQ = QVsdcTags.METADATA.get(QVsdcTags.TERMINAL_TX_QUALIFIERS).getDecoder().decode("36000000", 73, new DecodeSession());
-        assertThat(gpoCommand.getChildren(), hasItem(new DecodedData(QVsdcTags.TERMINAL_TX_QUALIFIERS.toString(QVsdcTags.METADATA), "36000000", 73, 77, expectedDecodedTTQ)));
-        assertThat(gpoCommand.getChildren(), hasItem(new DecodedData(QVsdcTags.UNPREDICTABLE_NUMBER.toString(QVsdcTags.METADATA), "0008E4C8", 102, 106)));
+        assertThat(gpoCommand.getChildren(), hasItem(DecodedData.constructed(QVsdcTags.TERMINAL_TX_QUALIFIERS.toString(QVsdcTags.METADATA), "36000000", 73, 77, expectedDecodedTTQ)));
+        assertThat(gpoCommand.getChildren(), hasItem(DecodedData.primitive(QVsdcTags.UNPREDICTABLE_NUMBER.toString(QVsdcTags.METADATA), "0008E4C8", 102, 106)));
         assertThat(modelMap, not(hasKey("rawData")));
     }
 
@@ -218,9 +218,9 @@ public class DecodeControllerTest {
         assertThat(responseChildren, hasItem(new DecodedData(EmvTags.NON_TLV_RESPONSE_TEMPLATE, "80 (Fixed response template)", "1C00080101001001010018030400", 8, 24, Arrays.asList(
                 new DecodedData(EmvTags.APPLICATION_INTERCHANGE_PROFILE, "82 (AIP)", "1C00", 10, 12, Decoders.AIP.decode("1C00", 10, new DecodeSession())),
                 new DecodedData(EmvTags.AFL, "94 (AFL)", "080101001001010018030400", 12, 24, Arrays.asList(
-                        new DecodedData("", "SFI 1 number 1", 12, 16),
-                        new DecodedData("", "SFI 2 number 1", 16, 20),
-                        new DecodedData("", "SFI 3 number 3-4", 20, 24)
+                        DecodedData.primitive("", "SFI 1 number 1", 12, 16),
+                        DecodedData.primitive("", "SFI 2 number 1", 16, 20),
+                        DecodedData.primitive("", "SFI 3 number 3-4", 20, 24)
                 )))
         )));
     }
@@ -236,7 +236,6 @@ public class DecodeControllerTest {
     @Test
     public void testJson() throws Exception {
         String s = mockMvc.perform(get("/api/decode").param("tag", "95").param("value", "8000000000").param("meta", "EMV")).andReturn().getResponse().getContentAsString();
-        System.out.println(s);
 //                .andExpect();
 
     }
