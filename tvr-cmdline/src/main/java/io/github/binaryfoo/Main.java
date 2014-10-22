@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -40,8 +41,8 @@ public class Main {
     private static void printHelp() {
         System.out.println("Usage Main <decode-type> <value> [<tag-set>]");
         System.out.println("  <decode-type> is one of");
-        for (TagInfo tag: RootDecoder.getSupportedTags()){
-            System.out.println("    " + tag.getShortName() + ": " + tag.getLongName());
+        for (Map.Entry<String, TagInfo> tag: RootDecoder.getSupportedTags()){
+            System.out.println("    " + tag.getKey() + ": " + tag.getValue().getShortName());
         }
         System.out.println("  <value> is the hex string or '-' for standard input");
         System.out.println("  <tag-set> is one of " + RootDecoder.getAllTagMeta() + " defaults to EMV");
