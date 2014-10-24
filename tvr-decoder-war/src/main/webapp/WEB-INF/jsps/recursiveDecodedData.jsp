@@ -7,7 +7,7 @@
     </c:if>
 	<c:if test="${not item.composite}">
 		<div class="decoded" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
-	    <span class="rawData">${item.rawData}</span> <span class="decodedData">${item.decodedData}</span>
+	    <span class="rawData" data-category="${item.category}">${item.rawData}</span> <span class="decodedData">${item.decodedData}</span>
 	    </div>
     </c:if>
 	<c:if test="${item.composite}">
@@ -15,7 +15,7 @@
         <table class="composite-decoded" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
             <tr>
                 <td colspan="2">
-                <span class="composite-label">${item.rawData} <span class="glyphicon glyphicon-zoom-${noisy[item.tag] ? 'in' : 'out'} expander" data-item="${itemId}"></span> <span class="composite-chunked" data-item="${itemId}">${item.decodedData}</span></span>
+                <span class="composite-label"><span data-category="${item.category}">${item.rawData}</span> <span class="glyphicon glyphicon-zoom-${noisy[item.tag] ? 'in' : 'out'} expander" data-item="${itemId}"></span> <span class="composite-chunked" data-item="${itemId}">${item.decodedData}</span></span>
                 </td>
             </tr>
             <tr class="detail" data-item="${itemId}">

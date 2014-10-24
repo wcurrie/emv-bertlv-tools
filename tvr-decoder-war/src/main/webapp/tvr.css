@@ -101,3 +101,7 @@ td.indent {
     overflow: hidden;
     display: none;
 }
+
+[data-category="c-apdu"],[data-category="r-apdu"] {
+    font-size: 1.2em;
+}
