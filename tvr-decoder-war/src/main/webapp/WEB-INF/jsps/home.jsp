@@ -37,8 +37,6 @@
                             initExpander($(this));
                         })
 			    	});
-                    $('[data-category="c-apdu"].apdu-label').prepend('<i class="fa fa-calculator"></i> ');
-                    $('[data-category="r-apdu"].apdu-label').before('<i class="fa fa-credit-card"></i> ');
 		    	});
             });
 	    }
@@ -120,7 +118,7 @@
     <link rel="stylesheet" href="/tvr.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome-face.css"/>
 </head>
 <body onload="onOptionChange()">
     <div id="container"><div id="content">

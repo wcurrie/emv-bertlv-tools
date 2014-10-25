@@ -111,6 +111,24 @@ span.composite-label {
     font-size: 1.2em;
 }
 
+[data-category="c-apdu"].apdu-label:before,[data-category="r-apdu"].apdu-label:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-right: 2px;
+}
+
+[data-category="c-apdu"].apdu-label:before {
+    content: "\f1ec";
+}
+
+[data-category="r-apdu"].apdu-label:before {
+    content: "\f09d";
+}
+
 [data-category="c-apdu"].decoded,[data-category="c-apdu"].composite-decoded {
     margin-top: 10px;
 }
