@@ -37,8 +37,8 @@
                             initExpander($(this));
                         })
 			    	});
-                    $('[data-category="c-apdu"]').prepend('<i class="fa fa-calculator"></i> ');
-                    $('[data-category="r-apdu"]').before('<i class="fa fa-credit-card"></i> ');
+                    $('[data-category="c-apdu"].apdu-label').prepend('<i class="fa fa-calculator"></i> ');
+                    $('[data-category="r-apdu"].apdu-label').before('<i class="fa fa-credit-card"></i> ');
 		    	});
             });
 	    }

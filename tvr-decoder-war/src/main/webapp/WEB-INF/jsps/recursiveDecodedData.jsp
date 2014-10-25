@@ -6,17 +6,17 @@
         <jsp:include page="rawDataFragment.jsp"/>
     </c:if>
 	<c:if test="${not item.composite}">
-		<div class="decoded" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
-            <c:if test="${not empty item.rawData}"><span class="rawData" data-category="${item.category}">${item.rawData}</span></c:if>
+		<div class="decoded" data-category="${item.category}" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
+            <c:if test="${not empty item.rawData}"><span class="rawData apdu-label" data-category="${item.category}">${item.rawData}</span></c:if>
             <span class="decodedData">${item.decodedData}</span>
         </div>
     </c:if>
 	<c:if test="${item.composite}">
         <c:set var="itemId" value="${item.startIndex}-${item.endIndex}" scope="request"/>
-        <div class="composite-decoded" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
+        <div class="composite-decoded" data-category="${item.category}" data-s="${item.startIndex}" data-e="${item.endIndex}" data-i="${rawDataId}">
             <div>
                 <span class="composite-label">
-                    <span data-category="${item.category}">${item.rawData}</span>
+                    <span class="apdu-label" data-category="${item.category}">${item.rawData}</span>
                     <span class="glyphicon glyphicon-zoom-${noisy[item.tag] ? 'in' : 'out'} expander" data-item="${itemId}"></span>
                     <span class="composite-chunked" data-item="${itemId}">${item.decodedData}</span>
                 </span>

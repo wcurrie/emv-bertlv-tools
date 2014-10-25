@@ -83,7 +83,7 @@ span.composite-label {
     -webkit-transition: opacity 0.5s ease-out;
     transition: opacity 0.5s ease-out;
     opacity: 1;
-    height: auto;
+    max-height: 100%
 }
 
 .expander:hover {
@@ -93,8 +93,13 @@ span.composite-label {
 
 .collapsed.detail {
     opacity: 0;
-    height: 0;
+    max-height: 0;
     overflow: hidden;
+}
+
+.detail {
+	-webkit-transition: height 0.5s ease-out;
+    transition: height 0.5s ease-out;
 }
 
 .collapsed td {
@@ -102,6 +107,10 @@ span.composite-label {
     display: none;
 }
 
-[data-category="c-apdu"],[data-category="r-apdu"] {
+[data-category="c-apdu"].apdu-label,[data-category="r-apdu"].apdu-label {
     font-size: 1.2em;
+}
+
+[data-category="c-apdu"].decoded,[data-category="c-apdu"].composite-decoded {
+    margin-top: 10px;
 }
