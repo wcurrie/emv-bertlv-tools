@@ -31,13 +31,11 @@ div#footer p {
 
 span.rawData {
 	font-weight: bold;
-    display: table-cell;
     padding-right: 5px;
     white-space: nowrap;
 }
 
 span.decodedData {
-    display: table-cell;
     white-space: pre;
 }
 
@@ -49,8 +47,8 @@ span.composite-label {
 	background-color: #00ffff;
 }
 
-td.indent {
-	width: 20px;
+.indent {
+	margin-left: 20px;
     vertical-align: top;
 }
 
@@ -77,6 +75,8 @@ td.indent {
     opacity: 0;
     height: 0;
     overflow: hidden;
+    width: 0;
+    display: inline-block;
 }
 
 .expanded.composite-chunked,.expanded.detail {
