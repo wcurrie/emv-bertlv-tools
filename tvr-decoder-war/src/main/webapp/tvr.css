@@ -137,3 +137,11 @@ span.composite-label {
   margin-top: 10px;
   font-size: 0.9em;
 }
+
+[data-short]:not([data-short=""]) {
+  cursor: pointer; 
+}
+
+[data-short]:not([data-short=""]):hover {
+  opacity: 0.6; 
+}
