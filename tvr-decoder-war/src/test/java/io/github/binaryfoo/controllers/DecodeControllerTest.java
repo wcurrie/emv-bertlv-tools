@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.ModelMap;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasItem;
@@ -215,9 +216,9 @@ public class DecodeControllerTest {
         assertThat(modelMap, hasEntry(is("decodedData"), is(not(nullValue()))));
         List<DecodedData> decodedData = (List<DecodedData>) modelMap.get("decodedData");
         List<DecodedData> responseChildren = decodedData.get(1).getChildren();
-        assertThat(responseChildren, hasItem(new DecodedData(EmvTags.NON_TLV_RESPONSE_TEMPLATE, "80 (Fixed response template)", "1C00080101001001010018030400", 8, 24, Arrays.asList(
-                new DecodedData(EmvTags.APPLICATION_INTERCHANGE_PROFILE, "82 (AIP)", "1C00", 10, 12, Decoders.AIP.decode("1C00", 10, new DecodeSession())),
-                new DecodedData(EmvTags.AFL, "94 (AFL)", "080101001001010018030400", 12, 24, Arrays.asList(
+        assertThat(responseChildren, hasItem(DecodedData.fromTlv(EmvTags.NON_TLV_RESPONSE_TEMPLATE, "80 (Fixed response template)", "1C00080101001001010018030400", 8, 24, Arrays.asList(
+                DecodedData.fromTlv(EmvTags.APPLICATION_INTERCHANGE_PROFILE, "82 (AIP)", "1C00", 10, 12, Decoders.AIP.decode("1C00", 10, new DecodeSession())),
+                DecodedData.fromTlv(EmvTags.AFL, "94 (AFL)", "080101001001010018030400", 12, 24, Arrays.asList(
                         DecodedData.primitive("", "SFI 1 number 1", 12, 16),
                         DecodedData.primitive("", "SFI 2 number 1", 16, 20),
                         DecodedData.primitive("", "SFI 3 number 3-4", 20, 24)
