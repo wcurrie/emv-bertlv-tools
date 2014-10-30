@@ -34,8 +34,9 @@ function doDecode() {
           content: function () {
             var short = this.getAttribute("data-short");
             var long = this.getAttribute("data-long");
-            return '<div class="short-background">' + short + '</div><div class="long-background">' + long + '</div>';
-          }
+            return '<div class="short-background">' + short + '</div>' + (long ? '<div class="long-background">' + long + '</div>' : '');
+          },
+          delay: {show: 0, hide: 400}
         });
       });
     });
@@ -132,4 +133,34 @@ function yupWeAreLoaded() {
     }
   }
   onOptionChange();
+
+  $("body").on("shown.bs.popover", function(ev) {
+    $('.apdu-label[data-short]:not([data-short=""])').each(function() {
+      if (ev.target != this) {
+        $(this).popover('hide');
+      }
+    })
+  });
 }
+
+(function() {
+  var originalLeave = $.fn.popover.Constructor.prototype.leave;
+  $.fn.popover.Constructor.prototype.leave = function(obj){
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
+    var container, timeout;
+
+    originalLeave.call(this, obj);
+
+    if(obj.currentTarget) {
+      container = $(obj.currentTarget).siblings('.popover');
+      timeout = self.timeout;
+      container.one('mouseenter', function(){
+        clearTimeout(timeout);
+        container.one('mouseleave', function(){
+          $.fn.popover.Constructor.prototype.leave.call(self, self);
+        });
+      })
+    }
+  };
+})();
