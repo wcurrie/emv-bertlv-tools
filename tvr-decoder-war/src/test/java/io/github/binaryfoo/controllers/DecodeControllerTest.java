@@ -49,8 +49,8 @@ public class DecodeControllerTest {
         DecodedData gpoCommand = findWithRaw(decodedData, "C-APDU: GPO");
         assertThat(gpoCommand, is(not(nullValue())));
         List<DecodedData> expectedDecodedTTQ = QVsdcTags.METADATA.get(QVsdcTags.TERMINAL_TX_QUALIFIERS).getDecoder().decode("36000000", 73, new DecodeSession());
-        assertThat(gpoCommand.getChildren(), hasItem(DecodedData.constructed(QVsdcTags.TERMINAL_TX_QUALIFIERS.toString(QVsdcTags.METADATA), "36000000", 73, 77, expectedDecodedTTQ)));
-        assertThat(gpoCommand.getChildren(), hasItem(DecodedData.primitive(QVsdcTags.UNPREDICTABLE_NUMBER.toString(QVsdcTags.METADATA), "0008E4C8", 102, 106)));
+        assertThat(gpoCommand.getChild(0), is(DecodedData.fromTlv(QVsdcTags.TERMINAL_TX_QUALIFIERS, QVsdcTags.METADATA, "36000000", 73, 77, expectedDecodedTTQ)));
+        assertThat(gpoCommand.getChild(gpoCommand.getChildren().size()-1), is(DecodedData.fromTlv(QVsdcTags.UNPREDICTABLE_NUMBER, QVsdcTags.METADATA, "0008E4C8", 102, 106, Collections.emptyList())));
         assertThat(modelMap, not(hasKey("rawData")));
     }
 
