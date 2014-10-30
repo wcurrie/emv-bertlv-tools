@@ -22,21 +22,25 @@
 <body onload="yupWeAreLoaded()">
     <div id="container"><div id="content">
     <form onsubmit="doDecode();return false" class="form-inline">
-    <select id="tag_field" onchange="onOptionChange()" class="form-control">
-    <c:forEach items="${tagInfos}" var="tagInfo">
-        <option value="${tagInfo.key}" data-maxlength="${tagInfo.value.maxLength}">${tagInfo.value.shortName}</option>
-    </c:forEach>
-    </select>
-    <textarea type="text" id="value_field" class="form-control" rows="1"></textarea>
-    <input type="submit" value="Decode" class="btn btn-primary"/>
-    <label for="tagmetaset_field"  style="font-size:small">with tags</label>
-    <select id="tagmetaset_field" class="form-control">
-    <c:forEach items="${tagMetaSets}" var="tagMeta">
-        <option value="${tagMeta}">${tagMeta}</option>
-    </c:forEach>
-    </select>
+        <select id="tag_field" onchange="onOptionChange()" class="form-control">
+            <c:forEach items="${tagInfos}" var="tagInfo">
+                <option value="${tagInfo.key}" data-maxlength="${tagInfo.value.maxLength}">${tagInfo.value.shortName}</option>
+            </c:forEach>
+        </select>
+        <textarea type="text" id="value_field" class="form-control" rows="1"></textarea>
+        <input type="submit" value="Decode" class="btn btn-primary"/>
+        <label for="tagmetaset_field"  style="font-size:small">with tags</label>
+        <select id="tagmetaset_field" class="form-control">
+            <c:forEach items="${tagMetaSets}" var="tagMeta">
+                <option value="${tagMeta}">${tagMeta}</option>
+            </c:forEach>
+        </select>
+        <label id="popoverChoice" style="display: none">
+            <input type="checkbox" id="hidePopovers" checked onchange="disablePopovers(this)"/>
+            Show Popovers
+        </label>
     </form>
-        <small>What on earth is this all about? Data involved in <a href="http://en.wikipedia.org/wiki/EMV">credit card</a> card transactions...</small>
+    <small>What on earth is this all about? Data involved in <a href="http://en.wikipedia.org/wiki/EMV">credit card</a> card transactions...</small>
     <div id="display">
     </div>
     </div>

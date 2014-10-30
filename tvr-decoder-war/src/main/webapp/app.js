@@ -27,7 +27,7 @@ function doDecode() {
           });
           initExpander($(this));
         });
-        $('.apdu-label[data-short]:not([data-short=""])').popover({
+        allPopovers().popover({
           html: true,
           trigger: 'hover',
           position: 'right',
@@ -38,6 +38,11 @@ function doDecode() {
           },
           delay: {show: 0, hide: 400}
         });
+        if (allPopovers().length > 0) {
+          $("#popoverChoice").show();
+        } else {
+          $("#popoverChoice").hide();
+        }
       });
     });
   });
@@ -115,6 +120,9 @@ function toggleExpander(e) {
   }
 }
 
+function allPopovers() {
+  return $('.apdu-label[data-short]:not([data-short=""])');
+}
 function yupWeAreLoaded() {
   function loadLastValue(key) {
     var last = localStorage.getItem(key);
@@ -135,12 +143,17 @@ function yupWeAreLoaded() {
   onOptionChange();
 
   $("body").on("shown.bs.popover", function(ev) {
-    $('.apdu-label[data-short]:not([data-short=""])').each(function() {
+    allPopovers().each(function() {
       if (ev.target != this) {
         $(this).popover('hide');
       }
     })
   });
+}
+
+function disablePopovers(input) {
+  var state = input.checked ? 'enable' : 'disable';
+  allPopovers().popover(state);
 }
 
 (function() {
