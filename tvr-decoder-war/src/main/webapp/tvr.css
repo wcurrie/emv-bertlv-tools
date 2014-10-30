@@ -129,6 +129,11 @@ span.composite-label {
   content: "\f09d";
 }
 
+.decoded,.composite-decoded {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+}
+
 [data-category="c-apdu"].decoded, [data-category="c-apdu"].composite-decoded {
   margin-top: 10px;
 }
