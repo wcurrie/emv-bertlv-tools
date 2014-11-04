@@ -82,7 +82,7 @@ function highlightBytes(decoded) {
   $("#rawData-" + rawDataId).show("fast");
   var i = 0;
   for (i = start; i < end; i++) {
-    $("#b-" + i).addClass("highlight");
+    $(".b-" + i).addClass("highlight");
   }
 }
 
