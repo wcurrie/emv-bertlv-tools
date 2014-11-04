@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,16 @@ public class DecodeController {
             modelMap.addAttribute("error", e.getMessage());
             return "validationError";
         }
+    }
+
+    @RequestMapping(value = "/decode/{tag}/{meta}/{value:(?s).+}", method = RequestMethod.GET)
+    public String linkToDecode(@PathVariable String tag, @PathVariable String value, @PathVariable String meta, ModelMap modelMap) throws UnsupportedEncodingException {
+        modelMap.put("tag", tag);
+        modelMap.put("value", URLEncoder.encode(value, "UTF-8"));
+        modelMap.put("meta", meta);
+        modelMap.put("tagInfos", RootDecoder.getSupportedTags());
+        modelMap.put("tagMetaSets", RootDecoder.getAllTagMeta());
+        return "home";
     }
 
     @RequestMapping(value = "/api/decode", produces = MediaType.APPLICATION_JSON_VALUE)

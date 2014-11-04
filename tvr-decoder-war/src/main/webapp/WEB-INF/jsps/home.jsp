@@ -39,6 +39,7 @@
             <input type="checkbox" id="hidePopovers" checked onchange="disablePopovers(this)"/>
             Show Popovers
         </label>
+        <a href="" class="fa fa-link" id="link-back" style="display: none"></a>
     </form>
     <small>What on earth is this all about? Data involved in <a href="http://en.wikipedia.org/wiki/EMV">credit card</a> card transactions...</small>
     <div id="display">
@@ -57,4 +58,12 @@
         ga('create', 'UA-7717677-1', 'auto');
         ga('send', 'pageview');
     </script>
+    <c:if test="${not empty value}">
+        <script>
+            $('#tag_field').val('<c:out value="${tag}"/>');
+            $('#tagmetaset_field').val('<c:out value="${meta}"/>');
+            $('#value_field').val(decodeURIComponent('<c:out value="${value}"/>'));
+            doDecode();
+        </script>
+    </c:if>
 </body>

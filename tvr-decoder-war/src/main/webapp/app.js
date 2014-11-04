@@ -12,39 +12,50 @@ function doDecode() {
       localStorage.setItem("tagmetaset", meta);
       localStorage.setItem("value", value);
     }
-    $.post('/t/decode', {tag: tag, value: value, meta: meta}, function (data) {
-      $("#display").html(data).slideDown('slow', function () {
-        $(".decoded,.composite-decoded").each(function () {
-          $(this).click(function (e) {
-            highlightBytes($(this));
-            e.stopPropagation();
-          });
-        });
-        $(".expander").each(function () {
-          $(this).click(function (e) {
-            toggleExpander($(this));
-            e.stopPropagation();
-          });
-          initExpander($(this));
-        });
-        allPopovers().popover({
-          html: true,
-          trigger: 'hover',
-          position: 'right',
-          content: function () {
-            var short = this.getAttribute("data-short");
-            var long = this.getAttribute("data-long");
-            return '<div class="short-background">' + short + '</div>' + (long ? '<div class="long-background">' + long + '</div>' : '');
-          },
-          delay: {show: 0, hide: 400}
-        });
-        if (allPopovers().length > 0) {
-          $("#popoverChoice").show();
-        } else {
-          $("#popoverChoice").hide();
-        }
+    $.post('/t/decode', {tag: tag, value: value, meta: meta}, displayDecoding);
+  });
+}
+
+function getPermalinkUrl() {
+  var tag = $('#tag_field').val();
+  var meta = $('#tagmetaset_field').val();
+  var value = $('#value_field').val();
+  var linkBack = '/t/decode/' + tag + '/' + meta + '/' + encodeURIComponent(value);
+  return window.location.href.replace(window.location.pathname, linkBack);
+}
+
+function displayDecoding(data) {
+  $("#display").html(data).slideDown('slow', function () {
+    $(".decoded,.composite-decoded").each(function () {
+      $(this).click(function (e) {
+        highlightBytes($(this));
+        e.stopPropagation();
       });
     });
+    $(".expander").each(function () {
+      $(this).click(function (e) {
+        toggleExpander($(this));
+        e.stopPropagation();
+      });
+      initExpander($(this));
+    });
+    allPopovers().popover({
+      html: true,
+      trigger: 'hover',
+      position: 'right',
+      content: function () {
+        var short = this.getAttribute("data-short");
+        var long = this.getAttribute("data-long");
+        return '<div class="short-background">' + short + '</div>' + (long ? '<div class="long-background">' + long + '</div>' : '');
+      },
+      delay: {show: 0, hide: 400}
+    });
+    if (allPopovers().length > 0) {
+      $("#popoverChoice").show();
+    } else {
+      $("#popoverChoice").hide();
+    }
+    $('#link-back').show().attr("href", getPermalinkUrl());
   });
 }
 
@@ -132,11 +143,12 @@ function yupWeAreLoaded() {
     return !!last;
   }
 
-  if (localStorage && window.location.href.indexOf("localhost") != -1) {
+  if (localStorage && window.location.href.indexOf("localhost") != -1 && $('#value_field').val() == '') {
     var haveLastSet = ['tag', 'tagmetaset', 'value'].reduce(function(haveAll, key) {
       return loadLastValue(key) && haveAll;
     }, true);
     if (haveLastSet) {
+      console.log('dev mode load');
       doDecode();
     }
   }
@@ -148,6 +160,17 @@ function yupWeAreLoaded() {
         $(this).popover('hide');
       }
     })
+  });
+
+  $('#link-back').popover({
+    html: true,
+    trigger: 'hover',
+    placement: 'bottom',
+    content: function () {
+      var url = getPermalinkUrl();
+      return '<input type="text" id="permalink" value="' + url +'" onclick="this.focus();this.select()"></input>';
+    },
+    delay: {show: 0, hide: 400}
   });
 }
 

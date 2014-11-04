@@ -107,11 +107,15 @@ span.composite-label {
   font-weight: normal;
 }
 
+#permalink {
+  width: 480px !important;
+}
+
 [data-category="c-apdu"].apdu-label, [data-category="r-apdu"].apdu-label {
   font-size: 1.2em;
 }
 
-[data-category="c-apdu"].apdu-label:before, [data-category="r-apdu"].apdu-label:before {
+[data-category="c-apdu"].apdu-label:before, [data-category="r-apdu"].apdu-label:before, .fa {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -127,6 +131,10 @@ span.composite-label {
 
 [data-category="r-apdu"].apdu-label:before {
   content: "\f09d";
+}
+
+.fa-link:before {
+  content: "\f0c1";
 }
 
 .decoded,.composite-decoded {
