@@ -26,10 +26,21 @@ function getPermalinkUrl() {
 
 function displayDecoding(data) {
   $("#display").html(data).slideDown('slow', function () {
-    $(".decoded,.composite-decoded").each(function () {
+    var decoded = $(".decoded,.composite-decoded");
+    decoded.each(function () {
       $(this).click(function (e) {
         highlightBytes($(this));
         e.stopPropagation();
+        mouseyMode = !mouseyMode;
+        $("#display").toggleClass("mousey-mode", mouseyMode);
+      });
+    });
+    decoded.each(function () {
+      $(this).mouseover(function (e) {
+        if (highlighted && mouseyMode) {
+          highlightBytes($(this));
+          e.stopPropagation();
+        }
       });
     });
     $(".expander").each(function () {
@@ -70,6 +81,7 @@ function onOptionChange() {
 }
 
 var highlighted = null;
+var mouseyMode = false;
 
 function highlightBytes(decoded) {
   clearHighlight();
