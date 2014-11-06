@@ -46,7 +46,7 @@
     </div>
     </div>
     <div id="footer">
-    	<p><a href="https://github.com/wcurrie/emv-bertlv-tools">Project</a></p>
+    	<p><a href="https://github.com/wcurrie/emv-bertlv-tools">Github</a></p>
     </div>
     </div>
     <script>

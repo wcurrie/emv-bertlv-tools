@@ -9,6 +9,7 @@ div#container {
   height: auto !important;
   height: 100%;
   min-height: 100%;
+  padding-bottom: 3em;
 }
 
 div#content {
@@ -20,8 +21,7 @@ div#footer {
   position: absolute;
   bottom: 0;
   text-align: center;
-  font-size: x-small;
-  z-index: -1;
+  font-size: small;
 }
 
 div#footer p {
