@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <c:forEach items="${decodedData}" var="item">
     <c:if test="${item.hexDump != null}">
+        <c:set var="apduRawDataId" value="${rawDataId}"/>
         <c:set var="data" value="${item.hexDump}" scope="request"/>
         <jsp:include page="rawDataFragment.jsp"/>
     </c:if>
@@ -30,5 +31,8 @@
                 </div>
             </div>
         </div>
+    </c:if>
+    <c:if test="${item.category eq 'recovered'}">
+        <c:set var="rawDataId" value="${apduRawDataId}" scope="request"/>
     </c:if>
 </c:forEach>
