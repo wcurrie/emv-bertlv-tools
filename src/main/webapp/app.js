@@ -83,6 +83,15 @@ function onOptionChange() {
 var highlighted = null;
 var mouseyMode = false;
 
+function mouseTip(ref) {
+  var totalLength = (ref.position.end - ref.position.start + 1);
+  if (ref.tag && ref.length) {
+    return "Tag: " + ref.tag.value + " Len: " + ref.length.value + " Total: " + totalLength;
+  } else {
+    return "Bytes: " + totalLength;
+  }
+}
+
 function highlightBytes(decoded) {
   clearHighlight();
   decoded.addClass("highlight");
@@ -98,6 +107,7 @@ function highlightBytes(decoded) {
   if (ref.length) {
     addHighlight(ref.length, "length-highlight");
   }
+  $('#mouse-tip').html(mouseTip(ref));
 }
 
 function addHighlight(position, clazz) {
@@ -112,6 +122,7 @@ function clearHighlight() {
   }
   highlighted = null;
   $(".bytes").removeClass("highlight").removeClass("tag-highlight").removeClass("length-highlight");
+  $('#mouse-tip').html("");
 }
 
 function hideRawData(rawDataId) {

@@ -44,6 +44,7 @@
     <small>What on earth is this all about? Data involved in <a href="http://en.wikipedia.org/wiki/EMV">credit card</a> card transactions...</small>
     <div id="display">
     </div>
+    <div id="mouse-tip"></div>
     </div>
     <div id="footer">
     	<p><a href="https://github.com/wcurrie/emv-bertlv-tools">Github</a></p>

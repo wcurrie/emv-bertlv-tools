@@ -18,8 +18,8 @@ public class DecodedDataExtension {
             } else {
                 mapOf(
                     "position" to toStartAndEnd(d.positionInHexDump),
-                    "tag" to toStartAndEnd(d.tagPositionInHexDump!!),
-                    "length" to toStartAndEnd(d.lengthPositionInHexDump!!)
+                    "tag" to toStartAndEnd(d.tagPositionInHexDump!!, d.tlv.tag.hexString),
+                    "length" to toStartAndEnd(d.lengthPositionInHexDump!!, d.tlv.length)
                 )
             }
             try {
@@ -31,6 +31,10 @@ public class DecodedDataExtension {
 
         fun toStartAndEnd(range: Range<Int>): Map<String, Int> {
             return mapOf("start" to range.start, "end" to range.end)
+        }
+
+        fun toStartAndEnd(range: Range<Int>, value: Any): Map<String, Any> {
+            return mapOf("start" to range.start, "end" to range.end, "value" to value.toString())
         }
     }
 }
