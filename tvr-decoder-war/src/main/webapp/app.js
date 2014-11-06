@@ -77,12 +77,20 @@ function highlightBytes(decoded) {
   highlighted = decoded;
 
   var rawDataId = decoded.attr("data-i");
-  var start = +decoded.attr("data-s");
-  var end = +decoded.attr("data-e");
+  var ref = JSON.parse(decoded.attr("data-hex-ref"));
   $("#rawData-" + rawDataId).show("fast");
-  var i = 0;
-  for (i = start; i < end; i++) {
-    $(".b-" + i).addClass("highlight");
+  addHighlight(ref.position, "highlight");
+  if (ref.tag) {
+    addHighlight(ref.tag, "tag-highlight");
+  }
+  if (ref.length) {
+    addHighlight(ref.length, "length-highlight");
+  }
+}
+
+function addHighlight(position, clazz) {
+  for (var i = position.start; i <= position.end; i++) {
+    $(".b-" + i).addClass(clazz);
   }
 }
 
@@ -91,7 +99,7 @@ function clearHighlight() {
     highlighted.removeClass("highlight");
   }
   highlighted = null;
-  $(".bytes").removeClass("highlight");
+  $(".bytes").removeClass("highlight").removeClass("tag-highlight").removeClass("length-highlight");
 }
 
 function hideRawData(rawDataId) {

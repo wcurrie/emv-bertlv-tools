@@ -19,6 +19,13 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://binaryfoo.github.io/tvr-decoder</taglib-uri>
+            <taglib-location>WEB-INF/tvr.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/t/*</url-pattern>

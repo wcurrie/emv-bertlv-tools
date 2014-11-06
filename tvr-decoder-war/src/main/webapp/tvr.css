@@ -47,6 +47,13 @@ span.composite-label {
   background-color: #00ffff;
 }
 
+.tag-highlight {
+  background-color: #05ff09;
+}
+.length-highlight {
+  background-color: #ffc606;
+}
+
 .indent {
   margin-left: 20px;
   vertical-align: top;
