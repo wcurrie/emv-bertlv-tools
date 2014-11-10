@@ -39,12 +39,12 @@
       <small>What on earth is this all about? Data involved in <a href="http://en.wikipedia.org/wiki/EMV">credit
         card</a> card transactions.
       </small>
+      <div id="tag-background">
+        <span id="tag-name"></span>
+        <span class="short-background"></span>
+        <div class="long-background"></div>
+      </div>
     </c:if>
-    <div id="tag-background">
-      <span id="tag-name"></span>
-      <span class="short-background"></span>
-      <div class="long-background"></div>
-    </div>
     <div id="display">
       <c:choose>
         <c:when test="${not empty value}">
