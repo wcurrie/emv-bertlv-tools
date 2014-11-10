@@ -16,6 +16,7 @@
           <c:forEach items="${tagInfos}" var="tagInfo">
             <option value="${tagInfo.key}"
                     data-maxlength="${tagInfo.value.maxLength}"
+                    data-longName="${tagInfo.value.longName}"
                     data-short="${tagInfo.value.shortBackground}"
                     data-long="${tagInfo.value.longBackground}">
                     ${tagInfo.value.shortName}
@@ -37,12 +38,13 @@
         <a href="" class="fa fa-link" id="link-back" style="display: none"></a>
       </form>
       <small>What on earth is this all about? Data involved in <a href="http://en.wikipedia.org/wiki/EMV">credit
-        card</a> card transactions.
+        card</a> card transactions. What does <a href="#" id="show-tag-background" class="tag-name" title="Show field explanation"></a> mean?
       </small>
       <div id="tag-background">
-        <span id="tag-name"></span>
+        <span class="tag-name"></span>:
         <span class="short-background"></span>
         <div class="long-background"></div>
+        <a href="#" id="hide-tag-background" class="fa fa-close" title="Close"></a>
       </div>
     </c:if>
     <div id="display">

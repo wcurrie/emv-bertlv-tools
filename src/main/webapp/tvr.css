@@ -153,6 +153,10 @@ span.composite-label {
   content: "\f0c1";
 }
 
+.fa-close:before {
+  content: "\f00d";
+}
+
 .decoded,.composite-decoded {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -171,20 +175,22 @@ span.composite-label {
   font-size: 0.9em;
 }
 
-#tag-name {
+span.tag-name {
   font-weight: bold;
 }
 
 #tag-background {
-  max-width: 30em;
+  position: relative;
+  max-width: 50em;
+  display: none;
+  background-color: #d9edf7;
+  padding: 0.5em;
 }
 
-@media (min-width: 70em) {
-  #tag-background {
-    position: absolute;
-    right: 1em;
-    top: 1em;
-  }
+#hide-tag-background {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 [data-short]:not([data-short=""]) {

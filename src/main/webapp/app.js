@@ -78,15 +78,13 @@ function onOptionChange() {
   if (value_field.val().length > maxLength) {
     value_field.val(value_field.val().substr(0, +maxLength))
   }
-  function setBackground(type) {
-    var text = selectedOption.getAttribute("data-" + type) || '';
-    $("#tag-background ." + type + "-background").text(text);
-    return !!text;
-  }
-  var hasShort = setBackground("short");
-  setBackground("long");
-  $("#tag-name").text(selectedOption.text + ":");
-  $("#tag-background").toggle(hasShort);
+  var background = $("#tag-background");
+  var longName = selectedOption.getAttribute("data-longName");
+  var shortBackground = selectedOption.getAttribute("data-short");
+  var longBackground = selectedOption.getAttribute("data-long") || '';
+  background.find(".short-background").text((longName ? longName + '. ' : '') + (shortBackground || ''));
+  background.find(".long-background").text(longBackground).toggle(!!longBackground);
+  $(".tag-name").text(selectedOption.text);
 }
 
 var highlighted = null;
@@ -198,6 +196,15 @@ function yupWeAreLoaded() {
       delay: {show: 0, hide: 400}
     });
   }
+
+  $('#show-tag-background').click(function(ev) {
+    ev.preventDefault();
+    $('#tag-background').slideDown();
+  });
+  $('#hide-tag-background').click(function(ev) {
+    ev.preventDefault();
+    $('#tag-background').slideUp();
+  });
 }
 
 function disablePopovers(input) {
