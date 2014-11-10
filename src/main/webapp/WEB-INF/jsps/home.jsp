@@ -14,7 +14,12 @@
       <form onsubmit="doDecode();return false" class="form-inline">
         <select id="tag_field" onchange="onOptionChange()" class="form-control">
           <c:forEach items="${tagInfos}" var="tagInfo">
-            <option value="${tagInfo.key}" data-maxlength="${tagInfo.value.maxLength}">${tagInfo.value.shortName}</option>
+            <option value="${tagInfo.key}"
+                    data-maxlength="${tagInfo.value.maxLength}"
+                    data-short="${tagInfo.value.shortBackground}"
+                    data-long="${tagInfo.value.longBackground}">
+                    ${tagInfo.value.shortName}
+            </option>
           </c:forEach>
         </select>
         <textarea type="text" id="value_field" class="form-control" rows="1"></textarea>
@@ -35,6 +40,11 @@
         card</a> card transactions.
       </small>
     </c:if>
+    <div id="tag-background">
+      <span id="tag-name"></span>
+      <span class="short-background"></span>
+      <div class="long-background"></div>
+    </div>
     <div id="display">
       <c:choose>
         <c:when test="${not empty value}">

@@ -167,6 +167,22 @@ span.composite-label {
   font-size: 0.9em;
 }
 
+#tag-name {
+  font-weight: bold;
+}
+
+#tag-background {
+  max-width: 30em;
+}
+
+@media (min-width: 70em) {
+  #tag-background {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+  }
+}
+
 [data-short]:not([data-short=""]) {
   cursor: pointer; 
 }

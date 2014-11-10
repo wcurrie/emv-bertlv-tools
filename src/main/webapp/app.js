@@ -72,11 +72,21 @@ function initialiseDecoding() {
 function onOptionChange() {
   var value_field = $('#value_field');
   var tagField = document.getElementById('tag_field');
-  var maxLength = tagField.options[tagField.selectedIndex].getAttribute("data-maxlength");
+  var selectedOption = tagField.options[tagField.selectedIndex];
+  var maxLength = selectedOption.getAttribute("data-maxlength");
   value_field.attr("maxLength", maxLength);
   if (value_field.val().length > maxLength) {
-    value_field.val(value_field.val().substr(0, maxLength))
+    value_field.val(value_field.val().substr(0, +maxLength))
   }
+  function setBackground(type) {
+    var text = selectedOption.getAttribute("data-" + type) || '';
+    $("#tag-background ." + type + "-background").text(text);
+    return !!text;
+  }
+  var hasShort = setBackground("short");
+  setBackground("long");
+  $("#tag-name").text(selectedOption.text + ":");
+  $("#tag-background").toggle(hasShort);
 }
 
 var highlighted = null;
