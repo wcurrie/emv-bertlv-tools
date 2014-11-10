@@ -162,6 +162,10 @@ span.composite-label {
   margin-top: 10px;
 }
 
+[data-category="parse-error"] {
+  color: red;
+}
+
 .long-background {
   margin-top: 10px;
   font-size: 0.9em;
