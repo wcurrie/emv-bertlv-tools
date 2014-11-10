@@ -940,7 +940,8 @@ O1QVpYkAC8HuetIxA6d/Wl9gM/WmlhtwfwqrWQgH3uOtJ1GSaa8gUZ6GojK2Djv1pBceW3HjGKjP
        width="360" />
     <a
        id="a3871"
-       xlink:href="/t/decode/9B/EMV/F800">
+       xlink:href="/t/decode/9B/EMV/F800"
+       xlink:title="Decode TSI">
       <rect
          y="635.16919"
          x="294.96454"
@@ -951,7 +952,8 @@ O1QVpYkAC8HuetIxA6d/Wl9gM/WmlhtwfwqrWQgH3uOtJ1GSaa8gUZ6GojK2Djv1pBceW3HjGKjP
     </a>
     <a
        id="a3883"
-       xlink:href="/t/decode/95/EMV/0000008000">
+       xlink:href="/t/decode/95/EMV/0000008000"
+       xlink:title="Decode TVR">
       <rect
          y="644.26056"
          x="66.670067"
@@ -962,7 +964,8 @@ O1QVpYkAC8HuetIxA6d/Wl9gM/WmlhtwfwqrWQgH3uOtJ1GSaa8gUZ6GojK2Djv1pBceW3HjGKjP
     </a>
     <a
        id="a3880"
-       xlink:href="/t/decode/9F34/EMV/410302">
+       xlink:href="/t/decode/9F34/EMV/410302"
+       xlink:title="Decode CVM Results">
       <rect
          y="633.14886"
          x="217.1828"

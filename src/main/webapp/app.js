@@ -7,11 +7,6 @@ function doDecode() {
     if (ga) {
       ga('send', 'event', tag, meta);
     }
-    if (localStorage && window.location.href.indexOf("localhost") != -1) {
-      localStorage.setItem("tag", tag);
-      localStorage.setItem("tagmetaset", meta);
-      localStorage.setItem("value", value);
-    }
     $.post('/t/decode', {tag: tag, value: value, meta: meta}, displayDecoding);
   });
 }
@@ -26,47 +21,51 @@ function getPermalinkUrl() {
 
 function displayDecoding(data) {
   $("#display").html(data).slideDown('slow', function () {
-    var decoded = $(".decoded,.composite-decoded");
-    decoded.each(function () {
-      $(this).click(function (e) {
-        highlightBytes($(this));
-        e.stopPropagation();
-        mouseyMode = !mouseyMode;
-        $("#display").toggleClass("mousey-mode", mouseyMode);
-      });
-    });
-    decoded.each(function () {
-      $(this).mouseover(function (e) {
-        if (highlighted && mouseyMode) {
-          highlightBytes($(this));
-          e.stopPropagation();
-        }
-      });
-    });
-    $(".expander").each(function () {
-      $(this).click(function (e) {
-        toggleExpander($(this));
-        e.stopPropagation();
-      });
-      initExpander($(this));
-    });
-    allPopovers().popover({
-      html: true,
-      trigger: 'hover',
-      position: 'right',
-      content: function () {
-        var short = this.getAttribute("data-short");
-        var long = this.getAttribute("data-long");
-        return '<div class="short-background">' + short + '</div>' + (long ? '<div class="long-background">' + long + '</div>' : '');
-      },
-      delay: {show: 0, hide: 400}
-    });
+    initialiseDecoding();
     if (allPopovers().length > 0) {
       $("#popoverChoice").show();
     } else {
       $("#popoverChoice").hide();
     }
     $('#link-back').show().attr("href", getPermalinkUrl());
+  });
+}
+
+function initialiseDecoding() {
+  var decoded = $(".decoded,.composite-decoded");
+  decoded.each(function () {
+    $(this).click(function (e) {
+      highlightBytes($(this));
+      e.stopPropagation();
+      mouseyMode = !mouseyMode;
+      $("#display").toggleClass("mousey-mode", mouseyMode);
+    });
+  });
+  decoded.each(function () {
+    $(this).mouseover(function (e) {
+      if (highlighted && mouseyMode) {
+        highlightBytes($(this));
+        e.stopPropagation();
+      }
+    });
+  });
+  $(".expander").each(function () {
+    $(this).click(function (e) {
+      toggleExpander($(this));
+      e.stopPropagation();
+    });
+    initExpander($(this));
+  });
+  allPopovers().popover({
+    html: true,
+    trigger: 'hover',
+    position: 'right',
+    content: function () {
+      var short = this.getAttribute("data-short");
+      var long = this.getAttribute("data-long");
+      return '<div class="short-background">' + short + '</div>' + (long ? '<div class="long-background">' + long + '</div>' : '');
+    },
+    delay: {show: 0, hide: 400}
   });
 }
 
@@ -165,26 +164,8 @@ function toggleExpander(e) {
 function allPopovers() {
   return $('.apdu-label[data-short]:not([data-short=""])');
 }
+
 function yupWeAreLoaded() {
-  function loadLastValue(key) {
-    var last = localStorage.getItem(key);
-    if (last) {
-      $('#' + key + '_field').val(last);
-    }
-    return !!last;
-  }
-
-  if (localStorage && window.location.href.indexOf("localhost") != -1 && $('#value_field').val() == '') {
-    var haveLastSet = ['tag', 'tagmetaset', 'value'].reduce(function(haveAll, key) {
-      return loadLastValue(key) && haveAll;
-    }, true);
-    if (haveLastSet) {
-      console.log('dev mode load');
-      doDecode();
-    }
-  }
-  onOptionChange();
-
   $("body").on("shown.bs.popover", function(ev) {
     allPopovers().each(function() {
       if (ev.target != this) {
@@ -193,16 +174,20 @@ function yupWeAreLoaded() {
     })
   });
 
-  $('#link-back').popover({
-    html: true,
-    trigger: 'hover',
-    placement: 'bottom',
-    content: function () {
-      var url = getPermalinkUrl();
-      return '<input type="text" id="permalink" value="' + url +'" onclick="this.focus();this.select()"></input>';
-    },
-    delay: {show: 0, hide: 400}
-  });
+  if (document.getElementById('value_field')) {
+    onOptionChange();
+
+    $('#link-back').popover({
+      html: true,
+      trigger: 'hover',
+      placement: 'bottom',
+      content: function () {
+        var url = getPermalinkUrl();
+        return '<input type="text" id="permalink" value="' + url +'" onclick="this.focus();this.select()"></input>';
+      },
+      delay: {show: 0, hide: 400}
+    });
+  }
 }
 
 function disablePopovers(input) {

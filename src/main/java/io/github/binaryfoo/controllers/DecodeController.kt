@@ -23,7 +23,7 @@ public class DecodeController {
     private val hexDumpFactory = HexDumpFactory()
     private val rootDecoder = RootDecoder()
 
-    RequestMapping(value = array("/decode"), method = array(RequestMethod.POST))
+    RequestMapping(value = array("/decode"), method = array(RequestMethod.POST, RequestMethod.GET))
     public fun decode(RequestParam tag: String, RequestParam value: String, RequestParam meta: String, modelMap: ModelMap): String {
         try {
             decodeInto(tag, value, meta, modelMap)
@@ -33,16 +33,16 @@ public class DecodeController {
             modelMap.addAttribute("error", e.getMessage())
             return "validationError"
         }
-
     }
 
     RequestMapping(value = array("/decode/{tag}/{meta}/{value:(?s).+}"), method = array(RequestMethod.GET))
-    public fun linkToDecode(PathVariable tag: String, PathVariable value: String, PathVariable meta: String, modelMap: ModelMap): String {
+    public fun linkToDecode(PathVariable tag: String, PathVariable value: String, PathVariable meta: String, modelMap: ModelMap, RequestParam(required = false) embed: Boolean): String {
         modelMap.put("tag", tag)
         modelMap.put("value", URLEncoder.encode(value, "UTF-8"))
         modelMap.put("meta", meta)
         modelMap.put("tagInfos", RootDecoder.getSupportedTags())
         modelMap.put("tagMetaSets", RootDecoder.getAllTagMeta())
+        modelMap.put("embed", embed)
         return "home"
     }
 
