@@ -170,6 +170,10 @@ span.composite-label {
   color: red;
 }
 
+[data-category="parse-warning"] {
+  color: #ff8b03;
+}
+
 .long-background {
   margin-top: 10px;
   font-size: 0.9em;
