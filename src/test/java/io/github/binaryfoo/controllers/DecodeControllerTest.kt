@@ -5,7 +5,6 @@ import io.github.binaryfoo.EmvTags
 import io.github.binaryfoo.QVsdcTags
 import io.github.binaryfoo.decoders.DecodeSession
 import io.github.binaryfoo.decoders.Decoders
-import io.github.binaryfoo.hex.ByteElement
 import io.github.binaryfoo.hex.HexDumpElement
 import org.junit.Before
 import org.junit.Test
@@ -70,11 +69,11 @@ public class DecodeControllerTest {
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
         assertThat(modelMap, not(hasKey("rawData")))
         val decodedData = modelMap.get("decodedData") as List<DecodedData>
-        assertThat(decodedData[0].hexDump!![0] as ByteElement, `is`(ByteElement("00", 0)))
-        assertThat(decodedData[0].hexDump!![1] as ByteElement, `is`(ByteElement("A4", 1)))
-        assertThat(decodedData[0].hexDump!![12] as ByteElement, `is`(ByteElement("00", 12)))
-        assertThat(decodedData[12].hexDump!![0] as ByteElement, `is`(ByteElement("77", 652)))
-        assertThat(decodedData[12].hexDump!![182] as ByteElement, `is`(ByteElement("00", 834)))
+        assertThat(decodedData[0].hexDump!![0], `is`(HexDumpElement("00", 0)))
+        assertThat(decodedData[0].hexDump!![1], `is`(HexDumpElement("A4", 1)))
+        assertThat(decodedData[0].hexDump!![12], `is`(HexDumpElement("00", 12)))
+        assertThat(decodedData[12].hexDump!![0], `is`(HexDumpElement("77", 652)))
+        assertThat(decodedData[12].hexDump!![182], `is`(HexDumpElement("00", 834)))
     }
 
     Test
@@ -191,8 +190,8 @@ public class DecodeControllerTest {
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
         assertThat(modelMap, hasEntry(`is`("rawData"), `is`(not(nullValue()))))
         val hexDump = modelMap.get("rawData") as List<HexDumpElement>
-        assertThat(hexDump[0] as ByteElement, `is`(ByteElement("F0", 0)))
-        assertThat(hexDump[319] as ByteElement, `is`(ByteElement("33", 319)))
+        assertThat(hexDump[0], `is`(HexDumpElement("F0", 0)))
+        assertThat(hexDump[319], `is`(HexDumpElement("33", 319)))
     }
 
     Test

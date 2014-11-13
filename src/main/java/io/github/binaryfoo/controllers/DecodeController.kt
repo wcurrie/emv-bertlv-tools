@@ -1,26 +1,21 @@
 package io.github.binaryfoo.controllers
 
-import io.github.binaryfoo.DecodedData
-import io.github.binaryfoo.HexDumpFactory
 import io.github.binaryfoo.RootDecoder
-import io.github.binaryfoo.TagInfo
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.*
 
-import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
-import java.util.Collections
 import java.util.HashMap
 import java.util.logging.Level
 import java.util.logging.Logger
+import io.github.binaryfoo.hex.HexDumpElement
 
 Controller
 public class DecodeController {
 
-    private val hexDumpFactory = HexDumpFactory()
     private val rootDecoder = RootDecoder()
 
     RequestMapping(value = array("/decode"), method = array(RequestMethod.POST, RequestMethod.GET))
@@ -71,7 +66,7 @@ public class DecodeController {
             val decodedData = rootDecoder.decode(upperCaseValue, meta, tagInfo)
             LOG.fine("Decoded successfully $decodedData")
             if (decodedData.empty || decodedData[0].hexDump == null) {
-                response.put("rawData", hexDumpFactory.splitIntoByteLengthStrings(upperCaseValue.replaceAll(":", " "), 0))
+                response.put("rawData", HexDumpElement.splitIntoByteLengthStrings(upperCaseValue.replaceAll(":", " "), 0))
             }
             response.put("decodedData", decodedData)
         } catch (e: Exception) {

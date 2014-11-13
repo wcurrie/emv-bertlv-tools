@@ -8,11 +8,11 @@
     <artifactId>tvr-decoder</artifactId>
 
     <properties>
-        <appengine.app.version>1-war</appengine.app.version>
+        <appengine.app.version>1</appengine.app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.0.6.RELEASE</spring.version>
         <kotlin.version>0.9.66</kotlin.version>
-        <appengine.target.version>1.9.11</appengine.target.version>
+        <appengine.target.version>1.9.15</appengine.target.version>
     </properties>
 
     <dependencies>
@@ -87,16 +87,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.5.3</version>
-        </dependency>
-        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
@@ -105,11 +95,6 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
-            <version>2.8.1</version>
         </dependency>
 
         <!-- Test Dependencies -->
@@ -219,7 +204,6 @@
                     <stopPort>8081</stopPort>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
