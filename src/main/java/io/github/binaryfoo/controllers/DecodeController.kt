@@ -12,6 +12,7 @@ import java.util.HashMap
 import java.util.logging.Level
 import java.util.logging.Logger
 import io.github.binaryfoo.hex.HexDumpElement
+import io.github.binaryfoo.toSimpleString
 
 Controller
 public class DecodeController {
@@ -64,7 +65,7 @@ public class DecodeController {
         try {
             val upperCaseValue = value.toUpperCase()
             val decodedData = rootDecoder.decode(upperCaseValue, meta, tagInfo)
-            LOG.fine("Decoded successfully $decodedData")
+            LOG.fine("Decoded successfully ${decodedData.toSimpleString()}")
             if (decodedData.empty || decodedData[0].hexDump == null) {
                 response.put("rawData", HexDumpElement.splitIntoByteLengthStrings(upperCaseValue.replaceAll(":", " "), 0))
             }
