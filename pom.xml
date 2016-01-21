@@ -11,7 +11,7 @@
         <appengine.app.version>1</appengine.app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.0.6.RELEASE</spring.version>
-        <kotlin.version>0.10.195</kotlin.version>
+        <kotlin.version>1.0.0-beta-4589</kotlin.version>
         <appengine.target.version>1.9.15</appengine.target.version>
     </properties>
 

@@ -14,13 +14,13 @@ import java.util.logging.Logger
 import io.github.binaryfoo.hex.HexDumpElement
 import io.github.binaryfoo.toSimpleString
 
-Controller
+@Controller
 public class DecodeController {
 
     private val rootDecoder = RootDecoder()
 
-    RequestMapping(value = array("/decode"), method = array(RequestMethod.POST, RequestMethod.GET))
-    public fun decode(RequestParam tag: String, RequestParam value: String, RequestParam meta: String, modelMap: ModelMap): String {
+    @RequestMapping("/decode", method = arrayOf(RequestMethod.POST, RequestMethod.GET))
+    public fun decode(@RequestParam tag: String, @RequestParam value: String, @RequestParam meta: String, modelMap: ModelMap): String {
         try {
             decodeInto(tag, value, meta, modelMap)
             modelMap.addAttribute("noisy", NoisyTagList.noisyOnes())
@@ -31,8 +31,8 @@ public class DecodeController {
         }
     }
 
-    RequestMapping(value = array("/decode/{tag}/{meta}/{value:(?s).+}"), method = array(RequestMethod.GET))
-    public fun linkToDecode(PathVariable tag: String, PathVariable value: String, PathVariable meta: String, modelMap: ModelMap, RequestParam(required = false) embed: Boolean): String {
+    @RequestMapping("/decode/{tag}/{meta}/{value:(?s).+}", method = arrayOf(RequestMethod.GET))
+    public fun linkToDecode(@PathVariable tag: String, @PathVariable value: String, @PathVariable meta: String, modelMap: ModelMap, @RequestParam(required = false) embed: Boolean): String {
         modelMap.put("tag", tag)
         modelMap.put("value", URLEncoder.encode(value, "UTF-8"))
         modelMap.put("meta", meta)
@@ -42,16 +42,16 @@ public class DecodeController {
         return "home"
     }
 
-    RequestMapping(value = array("/api/decode"), produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseBody
-    public fun decodeJson(RequestParam tag: String, RequestParam value: String, RequestParam meta: String): Map<String, Any> {
+    @RequestMapping("/api/decode", produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @ResponseBody
+    public fun decodeJson(@RequestParam tag: String, @RequestParam value: String, @RequestParam meta: String): Map<String, Any> {
         val response = HashMap<String, Any>()
         decodeInto(tag, value, meta, response)
         return response
     }
 
     private fun decodeInto(tag: String, value: String, meta: String, response: MutableMap<String, Any>) {
-        LOG.info("Request to decode tag [" + tag + "] and value [" + value + "] and meta [" + meta + "]")
+        LOG.info("Request to decode tag [$tag] and value [$value] and meta [$meta]")
         val tagInfo = RootDecoder.getTagInfo(tag)
         if (tagInfo == null) {
             LOG.fine("Unknown tag")
@@ -66,8 +66,8 @@ public class DecodeController {
             val upperCaseValue = value.toUpperCase()
             val decodedData = rootDecoder.decode(upperCaseValue, meta, tagInfo)
             LOG.fine("Decoded successfully ${decodedData.toSimpleString()}")
-            if (decodedData.empty || decodedData[0].hexDump == null) {
-                response.put("rawData", HexDumpElement.splitIntoByteLengthStrings(upperCaseValue.replaceAll(":", " "), 0))
+            if (decodedData.isEmpty() || decodedData[0].hexDump == null) {
+                response.put("rawData", HexDumpElement.splitIntoByteLengthStrings(upperCaseValue.replace(":", " "), 0))
             }
             response.put("decodedData", decodedData)
         } catch (e: Exception) {
@@ -78,8 +78,8 @@ public class DecodeController {
 
     }
 
-    ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
     public fun handleException(e: DecodeFailedException): Map<String, String> {
         return mapOf("error" to (e.getMessage() ?: e.javaClass.getSimpleName()))
     }
@@ -94,8 +94,7 @@ public class DecodeController {
         return b.toString()
     }
 
-    class object {
-
+    companion object {
         private val LOG = Logger.getLogger(javaClass<DecodeController>().getName())
     }
 

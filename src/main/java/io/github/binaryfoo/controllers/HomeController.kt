@@ -10,10 +10,10 @@ import org.springframework.web.servlet.ModelAndView
 /**
  * Controller for handling the basic home page request
  */
-Controller
+@Controller
 public class HomeController {
 
-    RequestMapping(array("/home"))
+    @RequestMapping("/home")
     public fun welcome(): ModelAndView {
         val model = HashMap<String, Any>()
         model.put("tagInfos", RootDecoder.getSupportedTags())

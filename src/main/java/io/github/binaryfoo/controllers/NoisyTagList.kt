@@ -7,7 +7,7 @@ import java.util.Arrays
 import java.util.HashMap
 
 public class NoisyTagList {
-    class object {
+    companion object {
 
         public val NOISY: List<Tag> = listOf(EmvTags.IAC_DEFAULT,
                 EmvTags.IAC_DENIAL,
