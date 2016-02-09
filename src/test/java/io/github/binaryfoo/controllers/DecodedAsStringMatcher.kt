@@ -5,7 +5,7 @@ import org.hamcrest.Description
 import org.hamcrest.TypeSafeMatcher
 import io.github.binaryfoo.toSimpleString
 
-public class DecodedAsStringMatcher(private val raw: String) : TypeSafeMatcher<List<DecodedData>>() {
+class DecodedAsStringMatcher(private val raw: String) : TypeSafeMatcher<List<DecodedData>>() {
 
     override fun matchesSafely(decodedData: List<DecodedData>): Boolean {
         return raw == toString(decodedData)
@@ -22,6 +22,6 @@ public class DecodedAsStringMatcher(private val raw: String) : TypeSafeMatcher<L
     private fun toString(decoded: List<DecodedData>): String = decoded.toSimpleString("")
 
     companion  object {
-        @JvmStatic public fun decodedAsString(raw: String): TypeSafeMatcher<List<DecodedData>> = DecodedAsStringMatcher(raw)
+        @JvmStatic fun decodedAsString(raw: String): TypeSafeMatcher<List<DecodedData>> = DecodedAsStringMatcher(raw)
     }
 }

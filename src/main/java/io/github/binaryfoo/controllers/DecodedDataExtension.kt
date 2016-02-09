@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.github.binaryfoo.DecodedData
 import io.github.binaryfoo.tlv.BerTlv
 
-public class DecodedDataExtension {
+class DecodedDataExtension {
 
     companion object {
-        @JvmStatic public fun hexDumpPositionToJson(d: DecodedData): String {
+        @JvmStatic fun hexDumpPositionToJson(d: DecodedData): String {
             val mapper = ObjectMapper()
             val position = if (d.tlv == null) {
                 mapOf("position" to toStartAndEnd(d.positionInHexDump))

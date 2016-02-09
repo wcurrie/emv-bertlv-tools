@@ -17,13 +17,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.ui.ModelMap
 
-public class DecodeControllerTest {
+class DecodeControllerTest {
 
     private var decodeController = DecodeController()
     private var mockMvc = MockMvcBuilders.standaloneSetup(decodeController).build()!!
 
-    @Test
-    public fun testPDOLShouldBeDecodedInGPOCommand() {
+    @Test fun testPDOLShouldBeDecodedInGPOCommand() {
         val input = """00A4040007A000000003101000
 6F318407A0000000031010A52650095649534120544553549F38189F66049F02069F03069F1A0295055F2A029A039C019F37049000
 80A8000023832136000000000000001000000000000000003600000000000036120315000008E4C800
@@ -39,8 +38,7 @@ public class DecodeControllerTest {
         assertThat(modelMap, not(hasKey("rawData")))
     }
 
-    @Test
-    public fun testContactless() {
+    @Test fun testContactless() {
         val modelMap = ModelMap()
         val input = """00A4040007A000000004101000
 6F1C8407A0000000041010A511500F505043204D434420303420207632309000
@@ -66,8 +64,7 @@ public class DecodeControllerTest {
         assertThat(decodedData[12].hexDump!![182], `is`(HexDumpElement("00", 834)))
     }
 
-    @Test
-    public fun testContactVisa() {
+    @Test fun testContactVisa() {
         val modelMap = ModelMap()
         val input = """00a4040007a000000003101000
 6f168407a0000000031010a50b50095649534120544553549000
@@ -105,8 +102,7 @@ public class DecodeControllerTest {
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
     }
 
-    @Test
-    public fun testContactMastercard() {
+    @Test fun testContactMastercard() {
         val modelMap = ModelMap()
         val input = """00a4040007a000000004101000
 6f1c8407a0000000041010a511500f505043204d434420303420207632309000
@@ -143,8 +139,7 @@ public class DecodeControllerTest {
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
     }
 
-    @Test
-    public fun testMagStripe() {
+    @Test fun testMagStripe() {
         val modelMap = ModelMap()
         val input = """00A4040007A000000004101000
 6F218407A0000000041010A516500A49443335312076312031BF0C075F5004746F746F9000
@@ -158,22 +153,19 @@ public class DecodeControllerTest {
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
     }
 
-    @Test
-    public fun testDecodeFilledDOL() {
+    @Test fun testDecodeFilledDOL() {
         val modelMap = ModelMap()
         decodeController.decode("filled-dol", "9F66049F02069F03069F1A0295055F2A029A039C019F3704:832136000000000000001000000000000000003600000000000036120315000008E4C8", "EMV", modelMap)
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
     }
 
-    @Test
-    public fun testDecodeFilledDOLTwo() {
+    @Test fun testDecodeFilledDOLTwo() {
         val modelMap = ModelMap()
         decodeController.decode("filled-dol", "9F02069F03069F090295055F2A029A039C019F37049F35019F45029F4C089F3403:000000001000000000000000000200000000000036120315000000AFDC22000000000000000000001F0300", "EMV", modelMap)
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
     }
 
-    @Test
-    public fun testInputWithConstructedTagThatCannotBeParsedAsConstructed() {
+    @Test fun testInputWithConstructedTagThatCannotBeParsedAsConstructed() {
         val modelMap = ModelMap()
         val input = "F082013CE007D002432BD10101E9409F02060000000009009F03060000000000005F2A0200365F3601029A031203209F21031410389C01009F3704000A7CA39F1E0831393062346262319F1A020036E581E2EF6D9F0607A00000000310109F1B0400010000DF400400010000DF420400010000DF430100DF4401009F3501229F3303E060C09F40056000F0A0019F090200029F6D020002DF32039F6A049F15024444DF57050000000000DF56050000000000DF580500000000009F660436000000EF719F0607A00000000410109F1B0400010000DF400400010000DF410400010000DF420400010000DF430100DF4401009F3501229F3303E008889F40056000F0A0019F090200029F6D020002DF32039F6A049F15024444DF57050000000000DF5605CC50848800DF5805CC50848800DF610101E30AE0085F249F6C9F039F33"
         decodeController.decode("constructed", input, "EMV", modelMap)
@@ -184,8 +176,7 @@ public class DecodeControllerTest {
         assertThat(hexDump[319], `is`(HexDumpElement("33", 319)))
     }
 
-    @Test
-    public fun testGetProcessingOptionsWithTemplate80Reply() {
+    @Test fun testGetProcessingOptionsWithTemplate80Reply() {
         val modelMap = ModelMap()
         val input = "80A8000002830000 800E1C000801010010010100180304009000"
         decodeController.decode("apdu-sequence", input, "EMV", modelMap)
@@ -204,17 +195,15 @@ public class DecodeControllerTest {
 """)))
     }
 
-    @Test
-    public fun testInvalidCvmResults() {
+    @Test fun testInvalidCvmResults() {
         val modelMap = ModelMap()
         val input = "F081D4E007D002522BD10101BF810105DF2D020000E50ADF91590120DF9158011FE9818C57104761340000000043D1712201131838758407A000000003101050095649534120544553549F260894961F236784C26D9F2701809F100706010A03A000009F36020134950500000000009F370400027D995F2A0200369C01209A030904029F02060000000020009F1A0200369F34033F0002820200005F3401115F2002202F9F6C0200009F660436000000E325E0239F03060000000000009F3303E060C09F1E0831393062346332629F3501229F09020002"
         decodeController.decode("constructed", input, "EMV", modelMap)
         assertThat(modelMap, hasEntry(`is`("decodedData"), `is`(not(nullValue()))))
     }
 
-    @Test
-    public fun testJson() {
-        mockMvc.perform(get("/api/decode").param("tag", "95").param("value", "8000000000").param("meta", "EMV")).andReturn().getResponse().getContentAsString()
+    @Test fun testJson() {
+        mockMvc.perform(get("/api/decode").param("tag", "95").param("value", "8000000000").param("meta", "EMV")).andReturn().response.contentAsString
         //                .andExpect();
 
     }

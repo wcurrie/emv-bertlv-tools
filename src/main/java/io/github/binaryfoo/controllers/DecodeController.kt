@@ -15,12 +15,12 @@ import io.github.binaryfoo.hex.HexDumpElement
 import io.github.binaryfoo.toSimpleString
 
 @Controller
-public class DecodeController {
+class DecodeController {
 
     private val rootDecoder = RootDecoder()
 
     @RequestMapping("/decode", method = arrayOf(RequestMethod.POST, RequestMethod.GET))
-    public fun decode(@RequestParam tag: String, @RequestParam value: String, @RequestParam meta: String, modelMap: ModelMap): String {
+    fun decode(@RequestParam tag: String, @RequestParam value: String, @RequestParam meta: String, modelMap: ModelMap): String {
         try {
             decodeInto(tag, value, meta, modelMap)
             modelMap.addAttribute("noisy", NoisyTagList.noisyOnes())
@@ -32,7 +32,7 @@ public class DecodeController {
     }
 
     @RequestMapping("/decode/{tag}/{meta}/{value:(?s).+}", method = arrayOf(RequestMethod.GET))
-    public fun linkToDecode(@PathVariable tag: String, @PathVariable value: String, @PathVariable meta: String, modelMap: ModelMap, @RequestParam(required = false) embed: Boolean): String {
+    fun linkToDecode(@PathVariable tag: String, @PathVariable value: String, @PathVariable meta: String, modelMap: ModelMap, @RequestParam(required = false) embed: Boolean): String {
         modelMap.put("tag", tag)
         modelMap.put("value", URLEncoder.encode(value, "UTF-8"))
         modelMap.put("meta", meta)
@@ -43,8 +43,7 @@ public class DecodeController {
     }
 
     @RequestMapping("/api/decode", produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    @ResponseBody
-    public fun decodeJson(@RequestParam tag: String, @RequestParam value: String, @RequestParam meta: String): Map<String, Any> {
+    @ResponseBody fun decodeJson(@RequestParam tag: String, @RequestParam value: String, @RequestParam meta: String): Map<String, Any> {
         val response = HashMap<String, Any>()
         decodeInto(tag, value, meta, response)
         return response
@@ -80,8 +79,8 @@ public class DecodeController {
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public fun handleException(e: DecodeFailedException): Map<String, String> {
-        return mapOf("error" to (e.message ?: e.javaClass.getSimpleName()))
+    fun handleException(e: DecodeFailedException): Map<String, String> {
+        return mapOf("error" to (e.message ?: e.javaClass.simpleName))
     }
 
     private fun getMessageTrace(e: Exception): String {

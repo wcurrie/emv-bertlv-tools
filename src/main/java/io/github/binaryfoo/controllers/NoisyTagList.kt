@@ -6,10 +6,10 @@ import io.github.binaryfoo.tlv.Tag
 import java.util.Arrays
 import java.util.HashMap
 
-public class NoisyTagList {
+class NoisyTagList {
     companion object {
 
-        public val NOISY: List<Tag> = listOf(EmvTags.IAC_DEFAULT,
+        val NOISY: List<Tag> = listOf(EmvTags.IAC_DEFAULT,
                 EmvTags.IAC_DENIAL,
                 EmvTags.IAC_ONLINE,
                 EmvTags.CDOL_1,
@@ -25,7 +25,7 @@ public class NoisyTagList {
         /**
          * Tags to show collapsed by default.
          */
-        public fun noisyOnes(): Map<Tag, Boolean> {
+        fun noisyOnes(): Map<Tag, Boolean> {
             val map = HashMap<Tag, Boolean>()
             for (tag in NOISY) {
                 map.put(tag, true)
