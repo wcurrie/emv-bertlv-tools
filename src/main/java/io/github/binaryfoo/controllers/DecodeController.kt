@@ -26,7 +26,7 @@ public class DecodeController {
             modelMap.addAttribute("noisy", NoisyTagList.noisyOnes())
             return "decodedData"
         } catch (e: DecodeFailedException) {
-            modelMap.addAttribute("error", e.getMessage())
+            modelMap.addAttribute("error", e.message)
             return "validationError"
         }
     }
@@ -81,21 +81,21 @@ public class DecodeController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public fun handleException(e: DecodeFailedException): Map<String, String> {
-        return mapOf("error" to (e.getMessage() ?: e.javaClass.getSimpleName()))
+        return mapOf("error" to (e.message ?: e.javaClass.getSimpleName()))
     }
 
     private fun getMessageTrace(e: Exception): String {
-        val b = StringBuilder(if (e.getMessage() != null) e.getMessage() else "Either something has gone wrong or you've given me rubbish")
-        var t: Throwable? = e.getCause()
+        val b = StringBuilder(if (e.message != null) e.message else "Either something has gone wrong or you've given me rubbish")
+        var t: Throwable? = e.cause
         while (t != null) {
             b.append(", ").append(t)
-            t = t!!.getCause()
+            t = t.cause
         }
         return b.toString()
     }
 
     companion object {
-        private val LOG = Logger.getLogger(javaClass<DecodeController>().getName())
+        private val LOG = Logger.getLogger(DecodeController::class.java.name)
     }
 
 }
