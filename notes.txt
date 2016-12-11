@@ -14,3 +14,6 @@ https://developers.google.com/custom-search/docs/snippets#creating_snippets
 Upload to App Engine:
 1. Use java 7 to compile (until App Engine supports 8 https://code.google.com/p/googleappengine/issues/detail?id=9537)
 2. mvn appengine:update
+
+Downloading logs:
+~/.m2//repository/com/google/appengine/appengine-java-sdk/1.9.31/appengine-java-sdk/appengine-java-sdk-1.9.31/bin/appcfg.sh --num_days=0 --include_all --severity=DEBUG request_logs target/tvr-decoder-1.0-SNAPSHOT/ a.log
