@@ -26,11 +26,11 @@ class DecodedDataExtension {
             }
         }
 
-        fun toStartAndEnd(range: ClosedRange<Int>): Map<String, Int> {
+        private fun toStartAndEnd(range: ClosedRange<Int>): Map<String, Int> {
             return mapOf("start" to range.start, "end" to range.endInclusive)
         }
 
-        fun toStartAndEnd(range: ClosedRange<Int>, value: Any): Map<String, Any> {
+        private fun toStartAndEnd(range: ClosedRange<Int>, value: Any): Map<String, Any> {
             return mapOf("start" to range.start, "end" to range.endInclusive, "value" to value.toString())
         }
     }

@@ -208,6 +208,6 @@ class DecodeControllerTest {
 
     }
 
-    private fun findWithRaw(list: List<DecodedData>, wanted: String): DecodedData? = list.firstOrNull() { it.rawData.startsWith(wanted) }
+    private fun findWithRaw(list: List<DecodedData>, wanted: String): DecodedData? = list.firstOrNull { it.rawData.startsWith(wanted) }
 
 }
